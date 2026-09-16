@@ -45,6 +45,12 @@ button { cursor: pointer; }
 .nav-link { display:flex; align-items:center; gap:.85rem; padding:.85rem .75rem; color:var(--muted-foreground); font-size:.76rem; text-decoration:none; border-left:2px solid transparent; transition:.2s ease; }
 .nav-link:hover { color:var(--foreground); background:var(--muted); }
 .nav-link-active { color:var(--foreground); border-left-color:var(--primary); background:color-mix(in oklab,var(--primary) 9%,transparent); }
+.mobile-nav-link { position:relative; display:flex; min-width:0; min-height:4.75rem; flex-direction:column; align-items:center; justify-content:center; gap:.38rem; color:var(--muted-foreground); font-family:var(--font-mono); font-size:.5rem; line-height:1; text-transform:uppercase; text-decoration:none; transition:.2s ease; }
+.mobile-nav-link::before { content:""; position:absolute; left:24%; right:24%; top:-1px; height:1px; background:transparent; transition:.2s ease; }
+.mobile-nav-link span { max-width:100%; overflow:hidden; padding-inline:.15rem; text-overflow:ellipsis; white-space:nowrap; }
+.mobile-nav-link-active { color:var(--foreground); background:linear-gradient(to bottom,color-mix(in oklab,var(--primary) 12%,transparent),transparent 72%); }
+.mobile-nav-link-active::before { background:var(--primary); box-shadow:0 0 12px var(--primary); }
+.mobile-nav-link-active svg { color:var(--primary); filter:drop-shadow(0 0 5px color-mix(in oklab,var(--primary) 65%,transparent)); }
 .hud-panel { border:1px solid var(--border); background:linear-gradient(145deg,color-mix(in oklab,var(--card) 90%,transparent),color-mix(in oklab,var(--background) 90%,transparent)); backdrop-filter:blur(16px); }
 .action-button,.secondary-button { min-height:2.75rem; display:inline-flex; align-items:center; justify-content:center; gap:.65rem; padding:.7rem 1.05rem; font-family:var(--font-mono); font-size:.66rem; font-weight:600; text-transform:uppercase; letter-spacing:.12em; text-decoration:none; transition:.2s ease; }
 .action-button { border:1px solid var(--primary); background:var(--primary); color:var(--primary-foreground); box-shadow:0 0 22px color-mix(in oklab,var(--primary) 18%,transparent); }

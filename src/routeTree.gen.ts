@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ComunidadeRouteImport } from './routes/comunidade'
+import { Route as ExplorarRouteImport } from './routes/explorar'
+import { Route as MinhaBaseRouteImport } from './routes/minha-base'
+import { Route as MissoesRouteImport } from './routes/missoes'
+import { Route as PassaporteRouteImport } from './routes/passaporte'
+import { Route as TerritorioTerritoryIdRouteImport } from './routes/territorio.$territoryId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComunidadeRoute = ComunidadeRouteImport.update({
+  id: '/comunidade',
+  path: '/comunidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExplorarRoute = ExplorarRouteImport.update({
+  id: '/explorar',
+  path: '/explorar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MinhaBaseRoute = MinhaBaseRouteImport.update({
+  id: '/minha-base',
+  path: '/minha-base',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MissoesRoute = MissoesRouteImport.update({
+  id: '/missoes',
+  path: '/missoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PassaporteRoute = PassaporteRouteImport.update({
+  id: '/passaporte',
+  path: '/passaporte',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TerritorioTerritoryIdRoute = TerritorioTerritoryIdRouteImport.update({
+  id: '/territorio/$territoryId',
+  path: '/territorio/$territoryId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/comunidade': typeof ComunidadeRoute
+  '/explorar': typeof ExplorarRoute
+  '/minha-base': typeof MinhaBaseRoute
+  '/missoes': typeof MissoesRoute
+  '/passaporte': typeof PassaporteRoute
+  '/territorio/$territoryId': typeof TerritorioTerritoryIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/comunidade': typeof ComunidadeRoute
+  '/explorar': typeof ExplorarRoute
+  '/minha-base': typeof MinhaBaseRoute
+  '/missoes': typeof MissoesRoute
+  '/passaporte': typeof PassaporteRoute
+  '/territorio/$territoryId': typeof TerritorioTerritoryIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/comunidade': typeof ComunidadeRoute
+  '/explorar': typeof ExplorarRoute
+  '/minha-base': typeof MinhaBaseRoute
+  '/missoes': typeof MissoesRoute
+  '/passaporte': typeof PassaporteRoute
+  '/territorio/$territoryId': typeof TerritorioTerritoryIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/comunidade'
+    | '/explorar'
+    | '/minha-base'
+    | '/missoes'
+    | '/passaporte'
+    | '/territorio/$territoryId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/comunidade'
+    | '/explorar'
+    | '/minha-base'
+    | '/missoes'
+    | '/passaporte'
+    | '/territorio/$territoryId'
+  id:
+    | '__root__'
+    | '/'
+    | '/comunidade'
+    | '/explorar'
+    | '/minha-base'
+    | '/missoes'
+    | '/passaporte'
+    | '/territorio/$territoryId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComunidadeRoute: typeof ComunidadeRoute
+  ExplorarRoute: typeof ExplorarRoute
+  MinhaBaseRoute: typeof MinhaBaseRoute
+  MissoesRoute: typeof MissoesRoute
+  PassaporteRoute: typeof PassaporteRoute
+  TerritorioTerritoryIdRoute: typeof TerritorioTerritoryIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/comunidade': {
+      id: '/comunidade'
+      path: '/comunidade'
+      fullPath: '/comunidade'
+      preLoaderRoute: typeof ComunidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explorar': {
+      id: '/explorar'
+      path: '/explorar'
+      fullPath: '/explorar'
+      preLoaderRoute: typeof ExplorarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/minha-base': {
+      id: '/minha-base'
+      path: '/minha-base'
+      fullPath: '/minha-base'
+      preLoaderRoute: typeof MinhaBaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/missoes': {
+      id: '/missoes'
+      path: '/missoes'
+      fullPath: '/missoes'
+      preLoaderRoute: typeof MissoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/passaporte': {
+      id: '/passaporte'
+      path: '/passaporte'
+      fullPath: '/passaporte'
+      preLoaderRoute: typeof PassaporteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/territorio/$territoryId': {
+      id: '/territorio/$territoryId'
+      path: '/territorio/$territoryId'
+      fullPath: '/territorio/$territoryId'
+      preLoaderRoute: typeof TerritorioTerritoryIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComunidadeRoute: ComunidadeRoute,
+  ExplorarRoute: ExplorarRoute,
+  MinhaBaseRoute: MinhaBaseRoute,
+  MissoesRoute: MissoesRoute,
+  PassaporteRoute: PassaporteRoute,
+  TerritorioTerritoryIdRoute: TerritorioTerritoryIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

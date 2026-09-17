@@ -18,6 +18,7 @@ const navigation = [
 const mobileNavigation = [
   { to: "/", label: "Início", icon: Home },
   { to: "/explorar", label: "Explorar", icon: Map },
+  { to: "/missoes", label: "Missões", icon: Rocket },
   { to: "/marketplace", label: "Mercado", icon: Store },
   { to: "/comunidade", label: "Rede", icon: Users },
   { to: "/minha-base", label: "Minha Base", icon: Orbit },
@@ -38,7 +39,7 @@ export function MarsiaShell({ children }: { children: ReactNode }) {
       <div className="absolute bottom-6 left-5 right-5 border border-border bg-card/60 p-4"><div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-signal"><Radio size={12}/>Link orbital</div><div className="mt-3 flex items-end justify-between"><span className="text-xs text-muted-foreground">Latência</span><span className="font-mono text-sm">12m 42s</span></div></div>
     </aside>
     <main className="min-h-screen pb-[calc(5.25rem+env(safe-area-inset-bottom))] pt-16 md:pb-0 md:pl-64"><div className="mx-auto max-w-[1600px] px-4 py-8 md:px-8 md:py-10">{children}<footer className="mt-16 border-t border-border py-6 text-[10px] leading-5 text-muted-foreground">Os territórios representados nesta plataforma possuem finalidade conceitual e simbólica e não constituem propriedade imobiliária reconhecida sobre Marte.</footer></div></main>
-    <nav aria-label="Navegação principal móvel" className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-5 border-t border-border bg-background/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-12px_32px_color-mix(in_oklab,var(--background)_72%,transparent)] backdrop-blur-xl md:hidden">
+    <nav aria-label="Navegação principal móvel" className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-6 border-t border-border bg-background/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-12px_32px_color-mix(in_oklab,var(--background)_72%,transparent)] backdrop-blur-xl md:hidden">
       {mobileNavigation.map(({ to, label, icon: Icon }) => {
         const isActive = to === "/" ? pathname === "/" : pathname === to || (to === "/explorar" && pathname.startsWith("/territorio/"));
         return <Link key={to} to={to} aria-current={isActive ? "page" : undefined} className={`mobile-nav-link ${isActive ? "mobile-nav-link-active" : ""}`}><Icon size={19} strokeWidth={isActive ? 2.2 : 1.7}/><span>{label}</span></Link>;

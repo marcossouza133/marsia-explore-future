@@ -45,7 +45,7 @@ export function MarsiaShell({ children }: { children: ReactNode }) {
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
       const target = event.target;
-      if (!(target instanceof Element) || !target.closest("a,button")) return;
+      if (!(target instanceof Element) || !target.closest("button")) return;
       if (showIntro) return;
       playInterfaceTone("click");
     };
@@ -53,11 +53,14 @@ export function MarsiaShell({ children }: { children: ReactNode }) {
     return () => document.removeEventListener("click", handleClick);
   }, [showIntro]);
 
-  const playInterfaceTone = (kind: "click" | "navigate") => {
+  const playInterfaceTone = async (kind: "click" | "navigate") => {
     const AudioContextClass = window.AudioContext;
     if (!AudioContextClass) return;
     const context = audioContext.current ?? new AudioContextClass();
     audioContext.current = context;
+    if (context.state === "suspended") {
+      try { await context.resume(); } catch { return; }
+    }
     if (context.state !== "running") return;
     const oscillator = context.createOscillator();
     const gain = context.createGain();

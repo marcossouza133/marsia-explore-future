@@ -75,5 +75,28 @@ button { cursor: pointer; }
 .mars-input { width:100%; margin-top:.6rem; border:1px solid var(--border); background:var(--background); padding:.85rem 1rem; color:var(--foreground); outline:none; font-family:var(--display); font-size:1.25rem; text-transform:uppercase; }
 .mars-input:focus { border-color:var(--primary); box-shadow:0 0 0 2px color-mix(in oklab,var(--primary) 15%,transparent); }
 .passport-grid { background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px); background-size:30px 30px; }
+.marsia-intro { position:fixed; inset:0; z-index:200; display:grid; place-items:center; overflow:hidden; background:var(--background); color:var(--foreground); opacity:1; transition:opacity .85s ease,visibility .85s ease; }
+.marsia-intro-leaving { opacity:0; visibility:hidden; }
+.marsia-intro-grid { position:absolute; inset:-30%; opacity:.18; background-image:linear-gradient(color-mix(in oklab,var(--primary) 22%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in oklab,var(--primary) 22%,transparent) 1px,transparent 1px); background-size:64px 64px; transform:perspective(500px) rotateX(58deg) translateY(23%); transform-origin:center bottom; animation:intro-grid-drift 7s linear both; }
+.marsia-intro-scan { position:absolute; inset:0; background:linear-gradient(to bottom,transparent 0%,color-mix(in oklab,var(--primary) 12%,transparent) 48%,color-mix(in oklab,var(--primary) 45%,transparent) 50%,transparent 52%); transform:translateY(-100%); animation:intro-scan 2.8s ease-in-out infinite; }
+.marsia-intro-core { position:relative; z-index:2; width:min(88vw,620px); text-align:center; }
+.marsia-intro-mark { display:grid; width:4.5rem; height:4.5rem; margin:0 auto 1.5rem; place-items:center; border:1px solid color-mix(in oklab,var(--primary) 58%,transparent); color:var(--primary); box-shadow:inset 0 0 22px color-mix(in oklab,var(--primary) 10%,transparent),0 0 32px color-mix(in oklab,var(--primary) 12%,transparent); animation:intro-mark-pulse 2s ease-in-out infinite; }
+.marsia-intro-kicker { font-family:var(--font-mono); font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-foreground); }
+.marsia-intro-logo { margin-top:.45rem; font-family:var(--font-display); font-size:clamp(4.8rem,16vw,10rem); font-weight:600; line-height:.85; letter-spacing:0; text-transform:uppercase; text-shadow:0 0 38px color-mix(in oklab,var(--primary) 20%,transparent); }
+.marsia-intro-loader { position:relative; width:min(72vw,360px); height:2px; margin:2.4rem auto 2rem; overflow:hidden; background:var(--border); }
+.marsia-intro-loader span { position:absolute; inset-block:0; left:0; width:42%; background:var(--primary); box-shadow:0 0 15px var(--primary); animation:intro-load 1.4s ease-in-out infinite; }
+.marsia-intro-signals { display:grid; min-height:6.25rem; gap:.65rem; align-content:start; font-family:var(--font-mono); font-size:.62rem; letter-spacing:.16em; text-align:left; color:var(--muted-foreground); }
+.marsia-intro-signals div { opacity:0; transform:translateY(5px); transition:opacity .55s ease,transform .55s ease,color .55s ease; }
+.marsia-intro-signals div.is-revealed { opacity:1; transform:translateY(0); color:var(--foreground); }
+.marsia-intro-signals span { display:inline-block; width:5px; height:5px; margin-right:.55rem; border-radius:50%; background:var(--signal); box-shadow:0 0 9px var(--signal); }
+.marsia-intro-skip,.marsia-intro-start { position:absolute; z-index:3; display:inline-flex; align-items:center; justify-content:center; gap:.5rem; border:1px solid var(--border); background:color-mix(in oklab,var(--background) 82%,transparent); color:var(--muted-foreground); font-family:var(--font-mono); font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; transition:.2s ease; }
+.marsia-intro-skip { top:max(1.25rem,env(safe-area-inset-top)); right:max(1.25rem,env(safe-area-inset-right)); padding:.7rem .85rem; }
+.marsia-intro-start { position:relative; margin:1rem auto 0; padding:.8rem 1rem; color:var(--foreground); border-color:var(--primary); }
+.marsia-intro-skip:hover,.marsia-intro-start:hover { color:var(--primary); border-color:var(--primary); }
+.marsia-intro-coordinates { position:absolute; z-index:2; right:max(1.25rem,env(safe-area-inset-right)); bottom:max(1.25rem,env(safe-area-inset-bottom)); font-family:var(--font-mono); font-size:.52rem; line-height:1.8; letter-spacing:.12em; text-align:right; color:var(--muted-foreground); }
+@keyframes intro-load { 0%{transform:translateX(-110%)} 55%,100%{transform:translateX(245%)} }
+@keyframes intro-scan { 0%,12%{transform:translateY(-100%)} 70%,100%{transform:translateY(100%)} }
+@keyframes intro-grid-drift { from{translate:0 0} to{translate:0 30px} }
+@keyframes intro-mark-pulse { 0%,100%{opacity:.6;transform:scale(.96)} 50%{opacity:1;transform:scale(1)} }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
-@media(max-width:640px){.map-marker b{display:none}.map-marker-active b{display:block}.mission-hero:after{right:-65%;}.action-button,.secondary-button{width:100%}}
+@media(max-width:640px){.map-marker b{display:none}.map-marker-active b{display:block}.mission-hero:after{right:-65%;}.action-button,.secondary-button{width:100%}.marsia-intro-core{width:82vw}.marsia-intro-logo{font-size:5.4rem}.marsia-intro-signals{font-size:.54rem}.marsia-intro-coordinates{left:1.25rem;right:auto;text-align:left}}

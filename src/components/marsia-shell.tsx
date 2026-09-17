@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Home, Map, Rocket, Users, Orbit, Fingerprint, Hexagon, Radio } from "lucide-react";
+import { Home, Map, Rocket, Users, Orbit, Fingerprint, Hexagon, Radio, Store, MessageSquare } from "lucide-react";
 import type { ReactNode } from "react";
 import { Toaster } from "sonner";
 import { MarsiaProvider } from "@/lib/marsia-context";
@@ -9,6 +9,8 @@ const navigation = [
   { to: "/explorar", label: "Explorar Marte", icon: Map },
   { to: "/missoes", label: "Missões", icon: Rocket },
   { to: "/comunidade", label: "Comunidade", icon: Users },
+  { to: "/marketplace", label: "Marketplace", icon: Store },
+  { to: "/mensagens", label: "Mensagens", icon: MessageSquare },
   { to: "/minha-base", label: "Minha Base", icon: Orbit },
   { to: "/passaporte", label: "Meu Passaporte", icon: Fingerprint },
 ] as const;
@@ -16,8 +18,8 @@ const navigation = [
 const mobileNavigation = [
   { to: "/", label: "Início", icon: Home },
   { to: "/explorar", label: "Explorar", icon: Map },
-  { to: "/missoes", label: "Missões", icon: Rocket },
-  { to: "/comunidade", label: "Comunidade", icon: Users },
+  { to: "/marketplace", label: "Mercado", icon: Store },
+  { to: "/comunidade", label: "Rede", icon: Users },
   { to: "/minha-base", label: "Minha Base", icon: Orbit },
 ] as const;
 
@@ -27,7 +29,7 @@ export function MarsiaShell({ children }: { children: ReactNode }) {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 md:px-8">
         <Link to="/" className="flex items-center gap-3"><Hexagon className="text-primary" size={25}/><span className="font-display text-2xl uppercase">MARSIA</span><span className="hidden border-l border-border pl-3 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground sm:inline">Mars Social<br/>Exploration</span></Link>
-        <div className="hidden items-center gap-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:flex"><span className="status-dot"/>Sistema online <span className="ml-3 text-foreground">SOL 0451</span></div>
+        <div className="flex items-center gap-4"><div className="hidden items-center gap-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted-foreground md:flex"><span className="status-dot"/>Sistema online <span className="ml-3 text-foreground">SOL 0451</span></div><Link to="/mensagens" aria-label="Mensagens" className="relative grid size-10 place-items-center border border-border bg-card/60 text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"><MessageSquare size={17}/><span className="absolute -right-1 -top-1 size-2 rounded-full bg-signal"/></Link></div>
       </div>
     </header>
     <aside className="fixed bottom-0 left-0 top-16 z-40 hidden w-64 border-r border-border bg-background/95 p-5 backdrop-blur-xl md:block">

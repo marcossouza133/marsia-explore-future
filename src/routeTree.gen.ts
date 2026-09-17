@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComunidadeRouteImport } from './routes/comunidade'
 import { Route as ExplorarRouteImport } from './routes/explorar'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
+import { Route as MensagensRouteImport } from './routes/mensagens'
 import { Route as MinhaBaseRouteImport } from './routes/minha-base'
 import { Route as MissoesRouteImport } from './routes/missoes'
 import { Route as PassaporteRouteImport } from './routes/passaporte'
@@ -36,6 +37,11 @@ const ExplorarRoute = ExplorarRouteImport.update({
 const MarketplaceRoute = MarketplaceRouteImport.update({
   id: '/marketplace',
   path: '/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MensagensRoute = MensagensRouteImport.update({
+  id: '/mensagens',
+  path: '/mensagens',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MinhaBaseRoute = MinhaBaseRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/comunidade': typeof ComunidadeRoute
   '/explorar': typeof ExplorarRoute
   '/marketplace': typeof MarketplaceRoute
+  '/mensagens': typeof MensagensRoute
   '/minha-base': typeof MinhaBaseRoute
   '/missoes': typeof MissoesRoute
   '/passaporte': typeof PassaporteRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/comunidade': typeof ComunidadeRoute
   '/explorar': typeof ExplorarRoute
   '/marketplace': typeof MarketplaceRoute
+  '/mensagens': typeof MensagensRoute
   '/minha-base': typeof MinhaBaseRoute
   '/missoes': typeof MissoesRoute
   '/passaporte': typeof PassaporteRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/comunidade': typeof ComunidadeRoute
   '/explorar': typeof ExplorarRoute
   '/marketplace': typeof MarketplaceRoute
+  '/mensagens': typeof MensagensRoute
   '/minha-base': typeof MinhaBaseRoute
   '/missoes': typeof MissoesRoute
   '/passaporte': typeof PassaporteRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/comunidade'
     | '/explorar'
     | '/marketplace'
+    | '/mensagens'
     | '/minha-base'
     | '/missoes'
     | '/passaporte'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/comunidade'
     | '/explorar'
     | '/marketplace'
+    | '/mensagens'
     | '/minha-base'
     | '/missoes'
     | '/passaporte'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/comunidade'
     | '/explorar'
     | '/marketplace'
+    | '/mensagens'
     | '/minha-base'
     | '/missoes'
     | '/passaporte'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   ComunidadeRoute: typeof ComunidadeRoute
   ExplorarRoute: typeof ExplorarRoute
   MarketplaceRoute: typeof MarketplaceRoute
+  MensagensRoute: typeof MensagensRoute
   MinhaBaseRoute: typeof MinhaBaseRoute
   MissoesRoute: typeof MissoesRoute
   PassaporteRoute: typeof PassaporteRoute
@@ -162,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/marketplace'
       fullPath: '/marketplace'
       preLoaderRoute: typeof MarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mensagens': {
+      id: '/mensagens'
+      path: '/mensagens'
+      fullPath: '/mensagens'
+      preLoaderRoute: typeof MensagensRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/minha-base': {
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   ComunidadeRoute: ComunidadeRoute,
   ExplorarRoute: ExplorarRoute,
   MarketplaceRoute: MarketplaceRoute,
+  MensagensRoute: MensagensRoute,
   MinhaBaseRoute: MinhaBaseRoute,
   MissoesRoute: MissoesRoute,
   PassaporteRoute: PassaporteRoute,

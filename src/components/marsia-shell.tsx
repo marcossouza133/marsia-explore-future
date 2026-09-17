@@ -3,6 +3,8 @@ import { Home, Map, Rocket, Users, Orbit, Fingerprint, Hexagon, Radio, Store, Me
 import type { ReactNode } from "react";
 import { Toaster } from "sonner";
 import { MarsiaProvider } from "@/lib/marsia-context";
+import { useEffect, useRef, useState } from "react";
+import { hasSeenMarsiaIntro, MarsiaIntro } from "@/components/marsia-intro";
 
 const navigation = [
   { to: "/", label: "Início", icon: Home },
@@ -26,7 +28,55 @@ const mobileNavigation = [
 
 export function MarsiaShell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
+  const previousPath = useRef(pathname);
+  const audioContext = useRef<AudioContext | null>(null);
+  const [showIntro, setShowIntro] = useState(false);
+
+  useEffect(() => {
+    if (pathname === "/" && !hasSeenMarsiaIntro()) setShowIntro(true);
+  }, []);
+
+  useEffect(() => {
+    if (previousPath.current === pathname) return;
+    previousPath.current = pathname;
+    playInterfaceTone("navigate");
+  }, [pathname]);
+
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element) || !target.closest("button")) return;
+      if (showIntro) return;
+      playInterfaceTone("click");
+    };
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, [showIntro]);
+
+  const playInterfaceTone = async (kind: "click" | "navigate") => {
+    const AudioContextClass = window.AudioContext;
+    if (!AudioContextClass) return;
+    const context = audioContext.current ?? new AudioContextClass();
+    audioContext.current = context;
+    if (context.state === "suspended") {
+      try { await context.resume(); } catch { return; }
+    }
+    if (context.state !== "running") return;
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(kind === "navigate" ? 440 : 620, context.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(kind === "navigate" ? 660 : 480, context.currentTime + 0.08);
+    gain.gain.setValueAtTime(0.025, context.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.1);
+    oscillator.connect(gain);
+    gain.connect(context.destination);
+    oscillator.start();
+    oscillator.stop(context.currentTime + 0.1);
+  };
+
   return <MarsiaProvider><div className="min-h-screen bg-background text-foreground selection:bg-primary/30"><div className="scanlines" aria-hidden="true" />
+    <MarsiaIntro active={showIntro} onComplete={() => setShowIntro(false)} />
     <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-background/90 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-4 md:px-8">
         <Link to="/" className="flex items-center gap-3"><Hexagon className="text-primary" size={25}/><span className="font-display text-2xl uppercase">MARSIA</span><span className="hidden border-l border-border pl-3 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground sm:inline">Mars Social<br/>Exploration</span></Link>

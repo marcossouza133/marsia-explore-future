@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComunidadeRouteImport } from './routes/comunidade'
 import { Route as ExplorarRouteImport } from './routes/explorar'
+import { Route as MarketplaceRouteImport } from './routes/marketplace'
+import { Route as MensagensRouteImport } from './routes/mensagens'
 import { Route as MinhaBaseRouteImport } from './routes/minha-base'
 import { Route as MissoesRouteImport } from './routes/missoes'
 import { Route as PassaporteRouteImport } from './routes/passaporte'
@@ -30,6 +32,16 @@ const ComunidadeRoute = ComunidadeRouteImport.update({
 const ExplorarRoute = ExplorarRouteImport.update({
   id: '/explorar',
   path: '/explorar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketplaceRoute = MarketplaceRouteImport.update({
+  id: '/marketplace',
+  path: '/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MensagensRoute = MensagensRouteImport.update({
+  id: '/mensagens',
+  path: '/mensagens',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MinhaBaseRoute = MinhaBaseRouteImport.update({
@@ -57,6 +69,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/comunidade': typeof ComunidadeRoute
   '/explorar': typeof ExplorarRoute
+  '/marketplace': typeof MarketplaceRoute
+  '/mensagens': typeof MensagensRoute
   '/minha-base': typeof MinhaBaseRoute
   '/missoes': typeof MissoesRoute
   '/passaporte': typeof PassaporteRoute
@@ -66,6 +80,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/comunidade': typeof ComunidadeRoute
   '/explorar': typeof ExplorarRoute
+  '/marketplace': typeof MarketplaceRoute
+  '/mensagens': typeof MensagensRoute
   '/minha-base': typeof MinhaBaseRoute
   '/missoes': typeof MissoesRoute
   '/passaporte': typeof PassaporteRoute
@@ -76,6 +92,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/comunidade': typeof ComunidadeRoute
   '/explorar': typeof ExplorarRoute
+  '/marketplace': typeof MarketplaceRoute
+  '/mensagens': typeof MensagensRoute
   '/minha-base': typeof MinhaBaseRoute
   '/missoes': typeof MissoesRoute
   '/passaporte': typeof PassaporteRoute
@@ -87,6 +105,8 @@ export interface FileRouteTypes {
     | '/'
     | '/comunidade'
     | '/explorar'
+    | '/marketplace'
+    | '/mensagens'
     | '/minha-base'
     | '/missoes'
     | '/passaporte'
@@ -96,6 +116,8 @@ export interface FileRouteTypes {
     | '/'
     | '/comunidade'
     | '/explorar'
+    | '/marketplace'
+    | '/mensagens'
     | '/minha-base'
     | '/missoes'
     | '/passaporte'
@@ -105,6 +127,8 @@ export interface FileRouteTypes {
     | '/'
     | '/comunidade'
     | '/explorar'
+    | '/marketplace'
+    | '/mensagens'
     | '/minha-base'
     | '/missoes'
     | '/passaporte'
@@ -115,6 +139,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComunidadeRoute: typeof ComunidadeRoute
   ExplorarRoute: typeof ExplorarRoute
+  MarketplaceRoute: typeof MarketplaceRoute
+  MensagensRoute: typeof MensagensRoute
   MinhaBaseRoute: typeof MinhaBaseRoute
   MissoesRoute: typeof MissoesRoute
   PassaporteRoute: typeof PassaporteRoute
@@ -142,6 +168,20 @@ declare module '@tanstack/react-router' {
       path: '/explorar'
       fullPath: '/explorar'
       preLoaderRoute: typeof ExplorarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketplace': {
+      id: '/marketplace'
+      path: '/marketplace'
+      fullPath: '/marketplace'
+      preLoaderRoute: typeof MarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mensagens': {
+      id: '/mensagens'
+      path: '/mensagens'
+      fullPath: '/mensagens'
+      preLoaderRoute: typeof MensagensRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/minha-base': {
@@ -179,6 +219,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComunidadeRoute: ComunidadeRoute,
   ExplorarRoute: ExplorarRoute,
+  MarketplaceRoute: MarketplaceRoute,
+  MensagensRoute: MensagensRoute,
   MinhaBaseRoute: MinhaBaseRoute,
   MissoesRoute: MissoesRoute,
   PassaporteRoute: PassaporteRoute,

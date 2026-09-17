@@ -90,13 +90,15 @@ export function MarsiaIntro({ active, onComplete }: { active: boolean; onComplet
         <div className="marsia-intro-kicker">Protocolo de exploração // 01</div>
         <div className="marsia-intro-logo">MARSIA</div>
 
+        <div className="marsia-intro-loader" aria-label="Carregando experiência"><span /></div>
+
         {!started ? (
           <button type="button" className="marsia-intro-start" onClick={begin}>
             <Play size={16} /> INICIAR EXPLORAÇÃO
           </button>
         ) : (
           <>
-            <div className="marsia-intro-loader" aria-label="Carregando experiência"><span /></div>
+
 
             <div className="marsia-intro-signals" aria-live="polite">
               {signals.map((signal, index) => (

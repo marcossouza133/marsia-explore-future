@@ -68,6 +68,7 @@ export type AttackResult = { victory: boolean; delta: number; rival: string };
 type MarsiaState = {
   acquired: boolean;
   baseName: string;
+  playerName: string;
   territories: Territory[];
   coins: number;
   resources: ResourceItem[];
@@ -281,7 +282,7 @@ export function MarsiaProvider({ children }: { children: ReactNode }) {
     const delta = victory ? 120 + attacker.level * 20 : -40;
     setGame((g) => ({
       ...g,
-      coins: Math.max(0, g.coins - ATTACK_COST + (victory ? delta : delta)),
+      coins: Math.max(0, g.coins - ATTACK_COST + delta),
       territories: g.territories.map((t) =>
         t.id === attacker.id
           ? log(t, victory ? `Ataque vitorioso contra ${rival}: saque de ${delta} moedas.` : `Ataque repelido por ${rival}: perda de 40 moedas.`)
@@ -314,6 +315,7 @@ export function MarsiaProvider({ children }: { children: ReactNode }) {
     <MarsiaContext.Provider value={{
       acquired,
       baseName,
+      playerName: "Marcos Almeida",
       territories: game.territories,
       coins: game.coins,
       resources: game.resources,

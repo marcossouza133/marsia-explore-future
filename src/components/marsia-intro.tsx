@@ -3,7 +3,7 @@ import { AudioLines, ChevronRight, Hexagon, Play } from "lucide-react";
 
 const INTRO_SEEN_KEY = "marsia-intro-seen";
 const INTRO_AUDIO = "https://uhnzzzlgjyslletmwyws.supabase.co/storage/v1/object/public/audio%20inicio%20projeto%20marte/audio_marte_entrada.mpeg";
-const signals = ["SINAL DETECTADO", "COORDENADAS LOCALIZADAS", "TERRITÓRIO IDENTIFICADO"];
+const signals = ["SINAL LOCALIZADO", "ROTA DE EXPLORAÇÃO PRONTA"];
 
 export function MarsiaIntro({ active, onComplete }: { active: boolean; onComplete: () => void }) {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -57,9 +57,9 @@ export function MarsiaIntro({ active, onComplete }: { active: boolean; onComplet
     }
 
     signals.forEach((_, index) => {
-      timersRef.current.push(window.setTimeout(() => setRevealed(index + 1), 1500 + index * 1500));
+      timersRef.current.push(window.setTimeout(() => setRevealed(index + 1), 650 + index * 850));
     });
-    timersRef.current.push(window.setTimeout(() => finish(), 7000));
+    timersRef.current.push(window.setTimeout(() => finish(), 3200));
   };
 
   const retryAudio = async () => {
@@ -94,7 +94,7 @@ export function MarsiaIntro({ active, onComplete }: { active: boolean; onComplet
 
         {!started ? (
           <button type="button" className="marsia-intro-start" onClick={begin}>
-            <Play size={16} /> INICIAR EXPLORAÇÃO
+            <Play size={16} /> ENTRAR NA EXPEDIÇÃO
           </button>
         ) : (
           <>

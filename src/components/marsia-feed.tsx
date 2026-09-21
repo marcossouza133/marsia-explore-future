@@ -33,7 +33,7 @@ const incoming: Post[] = [
   { id: "i3", icon: Star, author: "Kai", handle: "@kai.orbit", time: "AGORA", text: "Registrei um novo ponto de interesse perto da minha base.", meta: "Coordenadas ELY-4471", likes: 11, liked: false, replies: [] },
 ];
 
-export function CommunityFeed() {
+export function CommunityFeed({ onOpenProfile, className = "" }: { onOpenProfile?: (name: string) => void; className?: string }) {
   const [posts, setPosts] = useState<Post[]>(initialPosts);
   const [draft, setDraft] = useState("");
   const [posting, setPosting] = useState(false);
@@ -80,7 +80,7 @@ export function CommunityFeed() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className={`space-y-4 ${className}`}>
       <Panel className="p-5">
         <div className="flex items-center justify-between">
           <Eyebrow>Transmitir para a rede</Eyebrow>
@@ -115,7 +115,7 @@ export function CommunityFeed() {
             <div className="min-w-0 flex-1">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <span className="block truncate font-display text-sm uppercase">{author}</span>
+                  {onOpenProfile ? <button className="block truncate text-left font-display text-sm uppercase transition-colors hover:text-primary" onClick={() => onOpenProfile(author)}>{author}</button> : <span className="block truncate font-display text-sm uppercase">{author}</span>}
                   <span className="font-mono text-[9px] text-muted-foreground">{handle}</span>
                 </div>
                 <span className="shrink-0 font-mono text-[9px] text-muted-foreground">{time}</span>
@@ -137,7 +137,7 @@ export function CommunityFeed() {
                   {replies.map((r) => (
                     <div key={r.id}>
                       <div className="flex items-center gap-2">
-                        <span className="font-display text-xs uppercase">{r.author}</span>
+                        {onOpenProfile ? <button className="font-display text-xs uppercase transition-colors hover:text-primary" onClick={() => onOpenProfile(r.author)}>{r.author}</button> : <span className="font-display text-xs uppercase">{r.author}</span>}
                         <span className="font-mono text-[9px] text-muted-foreground">{r.time}</span>
                       </div>
                       <p className="mt-1 text-xs leading-5 text-muted-foreground">{r.text}</p>

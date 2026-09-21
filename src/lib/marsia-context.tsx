@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import { toast } from "sonner";
 
 type MarsiaState = {
+  playerName: string;
   acquired: boolean;
   baseName: string;
   acquire: (name: string) => void;
@@ -11,6 +12,7 @@ type MarsiaState = {
 const MarsiaContext = createContext<MarsiaState | undefined>(undefined);
 
 export function MarsiaProvider({ children }: { children: ReactNode }) {
+  const playerName = "Marcos Almeida";
   const [acquired, setAcquired] = useState(false);
   const [baseName, setBaseName] = useState("Base Aurora");
 
@@ -32,6 +34,7 @@ export function MarsiaProvider({ children }: { children: ReactNode }) {
 
   return (
     <MarsiaContext.Provider value={{
+      playerName,
       acquired,
       baseName,
       acquire: (name) => { save(true, name); toast.success("Território M-042 registrado", { description: `${name} agora faz parte da sua jornada.` }); },

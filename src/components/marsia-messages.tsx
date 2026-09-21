@@ -11,21 +11,29 @@ const uid = () => `m-${Date.now()}-${seq++}`;
 const now = () => new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
 
 const initialConversations: Conversation[] = [
-  { id: "c1", name: "Luna", handle: "@luna.pathfinder", status: "Elysium Planitia", online: true, messages: [
-    { id: "m1", mine: false, text: "Vi que você registrou o M-042. Bem-vindo a Elysium!", time: "20:14" },
-    { id: "m2", mine: true, text: "Obrigado! Já estou montando a base.", time: "20:16" },
-    { id: "m3", mine: false, text: "Se quiser, te levo na próxima expedição Olympus.", time: "20:18" },
-  ] },
-  { id: "c2", name: "Kai", handle: "@kai.orbit", status: "Olympus Mons", online: true, messages: [
-    { id: "m4", mine: false, text: "Tenho um módulo de antena anunciado no marketplace, interessa?", time: "19:02" },
-  ] },
-  { id: "c3", name: "Nova", handle: "@nova.geo", status: "Valles Marineris", online: false, messages: [
-    { id: "m5", mine: true, text: "Consegue enviar as coordenadas do cânion?", time: "17:41" },
-    { id: "m6", mine: false, text: "Envio hoje à noite, estou em descida técnica.", time: "17:55" },
-  ] },
-  { id: "c4", name: "Elysium Explorers", handle: "@ely.team", status: "Canal de equipe // 23 membros", online: true, messages: [
-    { id: "m7", mine: false, text: "Reunião de expedição no Sol 0452, às 08h.", time: "16:30" },
-  ] },
+  {
+    id: "c1", name: "Luna", handle: "@luna.pathfinder", status: "Elysium Planitia", online: true, messages: [
+      { id: "m1", mine: false, text: "Vi que você registrou o M-042. Bem-vindo a Elysium!", time: "20:14" },
+      { id: "m2", mine: true, text: "Obrigado! Já estou montando a base.", time: "20:16" },
+      { id: "m3", mine: false, text: "Se quiser, te levo na próxima expedição Olympus.", time: "20:18" },
+    ]
+  },
+  {
+    id: "c2", name: "Kai", handle: "@kai.orbit", status: "Olympus Mons", online: true, messages: [
+      { id: "m4", mine: false, text: "Tenho um módulo de antena anunciado no marketplace, interessa?", time: "19:02" },
+    ]
+  },
+  {
+    id: "c3", name: "Nova", handle: "@nova.geo", status: "Valles Marineris", online: false, messages: [
+      { id: "m5", mine: true, text: "Consegue enviar as coordenadas do cânion?", time: "17:41" },
+      { id: "m6", mine: false, text: "Envio hoje à noite, estou em descida técnica.", time: "17:55" },
+    ]
+  },
+  {
+    id: "c4", name: "Elysium Explorers", handle: "@ely.team", status: "Canal de equipe // 23 membros", online: true, messages: [
+      { id: "m7", mine: false, text: "Reunião de expedição no Sol 0452, às 08h.", time: "16:30" },
+    ]
+  },
 ];
 
 const autoReplies = ["Recebido, explorador.", "Combinado, te chamo pelo Mars Comms.", "Anotado nas coordenadas da missão.", "Perfeito, seguimos assim."];
@@ -51,9 +59,9 @@ export function MessagesPage() {
     }, 1400);
   };
 
-  return <>
+  return <div className="page-workspace messages-page">
     <PageHeader code="Canal privado / 08" title="Mensagens" description="Converse diretamente com outros exploradores sobre missões, territórios e negociações." />
-    <div className="grid gap-6 lg:grid-cols-[.65fr_1.35fr]">
+    <div className="messages-workspace grid gap-6 lg:grid-cols-[.65fr_1.35fr]">
       <Panel className={`p-5 ${mobileOpen ? "hidden lg:block" : ""}`}>
         <Eyebrow>Exploradores conectados</Eyebrow>
         <div className="mt-5 space-y-1">
@@ -70,7 +78,7 @@ export function MessagesPage() {
         </div>
       </Panel>
 
-      <Panel className={`flex min-h-[520px] flex-col p-0 ${mobileOpen ? "" : "hidden lg:flex"}`}>
+      <Panel className={`flex min-h-[400px] flex-col p-0 ${mobileOpen ? "" : "hidden lg:flex"}`}>
         <div className="flex items-center gap-3 border-b border-border p-5">
           <button className="text-muted-foreground transition-colors hover:text-foreground lg:hidden" onClick={() => setMobileOpen(false)} aria-label="Voltar para conversas"><ArrowLeft size={18} /></button>
           <div className="grid size-10 place-items-center border border-border bg-muted font-display text-sm">{active.name.slice(0, 1)}</div>
@@ -99,8 +107,8 @@ export function MessagesPage() {
         </div>
       </Panel>
     </div>
-    <p className="mt-8 text-[10px] leading-4 text-muted-foreground">Conversas simuladas para demonstração do protótipo, sem envio real de mensagens.</p>
-  </>;
+    <p className="messages-note mt-8 text-[10px] leading-4 text-muted-foreground">Conversas simuladas para demonstração do protótipo, sem envio real de mensagens.</p>
+  </div>;
 }
 
 export function notifyUnavailable() { toast.info("Recurso simulado neste protótipo"); }

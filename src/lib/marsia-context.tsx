@@ -146,8 +146,9 @@ export function MarsiaProvider({ children }: { children: ReactNode }) {
     if (!loaded) return;
     try {
       localStorage.setItem(GAME_KEY, JSON.stringify(game));
-      if (game.territories.length > 0) {
-        sessionStorage.setItem(LEGACY_KEY, JSON.stringify({ acquired: true, baseName: game.territories[0].name }));
+      const first = game.territories[0];
+      if (first) {
+        sessionStorage.setItem(LEGACY_KEY, JSON.stringify({ acquired: true, baseName: first.name }));
       }
     } catch { /* armazenamento indisponível */ }
   }, [game, loaded]);

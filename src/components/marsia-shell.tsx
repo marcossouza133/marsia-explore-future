@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { Home, Map, Rocket, Users, Orbit, Fingerprint, Hexagon, Radio, Store, MessageSquare } from "lucide-react";
+import { Home, Map, Rocket, Users, Orbit, Hexagon, Radio, Store, MessageSquare } from "lucide-react";
 import type { ReactNode } from "react";
 import { Toaster } from "sonner";
 import { MarsiaProvider } from "@/lib/marsia-context";
@@ -14,7 +14,6 @@ const navigation = [
   { to: "/marketplace", label: "Marketplace", icon: Store },
   { to: "/mensagens", label: "Mensagens", icon: MessageSquare },
   { to: "/minha-base", label: "Minha Base", icon: Orbit },
-  { to: "/passaporte", label: "Meu Passaporte", icon: Fingerprint },
 ] as const;
 
 const mobileNavigation = [

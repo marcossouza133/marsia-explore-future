@@ -14,8 +14,8 @@ export function Stat({ label, value, sub }: { label: string; value: string; sub?
   return <div className="border-l border-border pl-4"><div className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{label}</div><div className="mt-1 font-display text-xl uppercase text-foreground">{value}</div>{sub && <div className="mt-1 text-xs text-muted-foreground">{sub}</div>}</div>;
 }
 
-export function Panel({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <section className={`hud-panel ${className}`}>{children}</section>;
+export function Panel({ children, className = "", onClick }: { children: ReactNode; className?: string; onClick?: (event: React.MouseEvent<HTMLElement>) => void }) {
+  return <section className={`hud-panel ${className}`} onClick={onClick}>{children}</section>;
 }
 
 export function PageHeader({ code, title, description }: { code: string; title: string; description: string }) {

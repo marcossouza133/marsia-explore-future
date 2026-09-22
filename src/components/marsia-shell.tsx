@@ -14,7 +14,6 @@ const navigation = [
   { to: "/marketplace", label: "Marketplace", icon: Store },
   { to: "/mensagens", label: "Mensagens", icon: MessageSquare },
   { to: "/minha-base", label: "Minha Base", icon: Orbit },
-  { to: "/passaporte", label: "Meu Passaporte", icon: Fingerprint },
 ] as const;
 
 const mobileNavigation = [

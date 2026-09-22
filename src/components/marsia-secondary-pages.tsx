@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { Link } from "@tanstack/react-router";
 import { Antenna, Atom, Bot, Check, CheckCircle2, ChevronRight, Compass, Crown, Dna, Fingerprint, FlaskConical, Globe2, Headphones, Hexagon, Leaf, Lock, LogOut, MapPin, Medal, Mic, MicOff, Orbit, Plus, Radio, Rocket, Satellite, Shield, SlidersHorizontal, Sparkles, Star, Telescope, Trophy, UserPlus, Users, Volume2, VolumeX, X, XCircle } from "lucide-react";
-import { useMarsia } from "@/lib/marsia-context";
+import { STRUCTURES, effectiveDefense, effectiveProduction, evolveCost, pendingCoins, shieldActive, useMarsia, type StructureId } from "@/lib/marsia-context";
 import { ActionLink, ActivityDot, CommsRoom, Eyebrow, PageHeader, Panel, Progress, Stat, Structure } from "@/components/ui";
 import { CommunityFeed } from "@/components/marsia-feed";
 

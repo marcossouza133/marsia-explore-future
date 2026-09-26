@@ -17,9 +17,9 @@ type Listing = {
   rarity: string;
   desc: string;
   icon: LucideIcon;
-  mine?: boolean;
-  meta?: string;
-  status?: "ativo" | "negociação";
+  mine?: boolean | undefined;
+  meta?: string | undefined;
+  status?: "ativo" | "negociação" | undefined;
 };
 
 const icons: Record<Category, LucideIcon> = { "Território": Mountain, "Estrutura": Wrench, "Recurso": Gem };
